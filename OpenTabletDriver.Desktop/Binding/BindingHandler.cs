@@ -26,6 +26,7 @@ namespace OpenTabletDriver.Desktop.Binding
 
         public Dictionary<int, BindingState?> PenButtons { set; get; } = new Dictionary<int, BindingState?>();
         public Dictionary<int, BindingState?> AuxButtons { set; get; } = new Dictionary<int, BindingState?>();
+        public Dictionary<int, BindingState?> TouchGestures { set; get; } = new Dictionary<int, BindingState?>();
         public Dictionary<int, BindingState?> MouseButtons { set; get; } = new Dictionary<int, BindingState?>();
 
         public BindingState? MouseScrollDown { set; get; }
@@ -50,6 +51,8 @@ namespace OpenTabletDriver.Desktop.Binding
                 HandleTabletReport(tablet, tablet.Properties.Specifications.Pen, tabletReport);
             if (report is IAuxReport auxReport)
                 HandleAuxiliaryReport(tablet, auxReport);
+            if (report is IGestureTouchReport gestureTouchReport)
+                HandleGestureTouchReport(tablet, gestureTouchReport);
             if (report is IMouseReport mouseReport)
                 HandleMouseReport(tablet, mouseReport);
         }
@@ -68,6 +71,11 @@ namespace OpenTabletDriver.Desktop.Binding
         private void HandleAuxiliaryReport(TabletReference tablet, IAuxReport report)
         {
             HandleBindingCollection(tablet, report, AuxButtons, report.AuxButtons);
+        }
+
+        private void HandleGestureTouchReport(TabletReference tablet, IGestureTouchReport report)
+        {
+            HandleBindingCollection(tablet, report, TouchGestures, report.TouchGestures);
         }
 
         private void HandleMouseReport(TabletReference tablet, IMouseReport report)

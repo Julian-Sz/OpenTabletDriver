@@ -18,6 +18,11 @@ namespace OpenTabletDriver.Plugin.Tablet
         public ButtonSpecifications AuxiliaryButtons { set; get; }
 
         /// <summary>
+        /// Specifications for the touchpad gestures.
+        /// </summary>
+        public GestureTouchpadSpecifications GestureTouchpad { set; get; }
+
+        /// <summary>
         /// Specifications for the mouse buttons.
         /// </summary>
         public ButtonSpecifications MouseButtons { set; get; }

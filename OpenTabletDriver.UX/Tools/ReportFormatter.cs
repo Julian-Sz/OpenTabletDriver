@@ -23,6 +23,8 @@ namespace OpenTabletDriver.UX.Tools
                 sb.AppendLines(GetStringFormat(tabletReport));
             if (report is IAuxReport auxReport)
                 sb.AppendLines(GetStringFormat(auxReport));
+            if (report is IGestureTouchReport gestureTouchReport)
+                sb.AppendLines(GetStringFormat(gestureTouchReport));
             if (report is IEraserReport eraserReport)
                 sb.AppendLines(GetStringFormat(eraserReport));
             if (report is IProximityReport proximityReport)
@@ -55,6 +57,11 @@ namespace OpenTabletDriver.UX.Tools
         private static IEnumerable<string> GetStringFormat(IAuxReport auxReport)
         {
             yield return $"AuxButtons:[{string.Join(" ", auxReport.AuxButtons)}]";
+        }
+
+        private static IEnumerable<string> GetStringFormat(IGestureTouchReport gestureTouchReport)
+        {
+            yield return $"TouchGestures:[{string.Join(" ", gestureTouchReport.TouchGestures)}]";
         }
 
         private static IEnumerable<string> GetStringFormat(IEraserReport eraserReport)

@@ -45,6 +45,11 @@ namespace OpenTabletDriver.UX.Controls
                     },
                     new TabPage
                     {
+                        Text = "Gesture Touchpad Settings",
+                        Content = gestureTouchBindingEditor = new GestureTouchpadBindingEditor()
+                    },
+                    new TabPage
+                    {
                         Text = "Mouse Settings",
                         Content = mouseBindingEditor = new MouseBindingEditor()
                     },
@@ -75,6 +80,7 @@ namespace OpenTabletDriver.UX.Controls
             outputModeEditor.ProfileBinding.Bind(ProfileBinding);
             penBindingEditor.ProfileBinding.Bind(ProfileBinding);
             auxBindingEditor.ProfileBinding.Bind(ProfileBinding);
+            gestureTouchBindingEditor.ProfileBinding.Bind(ProfileBinding);
             mouseBindingEditor.ProfileBinding.Bind(ProfileBinding);
             filterEditor.StoreCollectionBinding.Bind(ProfileBinding.Child(p => p.Filters));
             toolEditor.StoreCollectionBinding.Bind(App.Current, a => a.Settings.Tools);
@@ -94,7 +100,7 @@ namespace OpenTabletDriver.UX.Controls
         private Placeholder placeholder;
         private LogView logView;
         private OutputModeEditor outputModeEditor;
-        private BindingEditor penBindingEditor, auxBindingEditor, mouseBindingEditor;
+        private BindingEditor penBindingEditor, auxBindingEditor, gestureTouchBindingEditor, mouseBindingEditor;
         private PluginSettingStoreCollectionEditor<IPositionedPipelineElement<IDeviceReport>> filterEditor;
         private PluginSettingStoreCollectionEditor<ITool> toolEditor;
 
@@ -128,7 +134,8 @@ namespace OpenTabletDriver.UX.Controls
                 SetPageVisibility(outputModeEditor, true);
                 SetPageVisibility(filterEditor, true);
                 SetPageVisibility(penBindingEditor, tablet.Properties.Specifications.Pen != null);
-                SetPageVisibility(auxBindingEditor, tablet.Properties.Specifications.AuxiliaryButtons != null);
+                SetPageVisibility(auxBindingEditor, tablet.Properties.Specifications.AuxiliaryButtons != null || tablet.Properties.Specifications.GestureTouchpad != null);
+                SetPageVisibility(gestureTouchBindingEditor, tablet.Properties.Specifications.GestureTouchpad != null);
                 SetPageVisibility(mouseBindingEditor, tablet.Properties.Specifications.MouseButtons != null);
                 SetPageVisibility(toolEditor, true);
 
@@ -142,6 +149,7 @@ namespace OpenTabletDriver.UX.Controls
                 SetPageVisibility(filterEditor, false);
                 SetPageVisibility(penBindingEditor, false);
                 SetPageVisibility(auxBindingEditor, false);
+                SetPageVisibility(gestureTouchBindingEditor, false);
                 SetPageVisibility(mouseBindingEditor, false);
                 SetPageVisibility(toolEditor, false);
 

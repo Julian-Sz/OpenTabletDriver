@@ -32,6 +32,11 @@ namespace OpenTabletDriver.UX.Windows.Configurations.Controls.Specifications
                         Padding = 5,
                         Content = auxButtons = new ButtonSpecificationsEditor()
                     },
+                    new Expander{
+                        Header = "Gesture Touchpad",
+                        Padding = 5,
+                        Content = touchGestures = new GestureTouchpadSpecificationsEditor()
+                    },
                     new Expander
                     {
                         Header = "Touch",
@@ -49,6 +54,7 @@ namespace OpenTabletDriver.UX.Windows.Configurations.Controls.Specifications
             digitizer.SpecificationsBinding.Bind(SpecificationsBinding.Child(c => c.Digitizer));
             pen.SpecificationsBinding.Bind(SpecificationsBinding.Child(c => c.Pen));
             auxButtons.SpecificationsBinding.Bind(SpecificationsBinding.Child(c => c.AuxiliaryButtons));
+            touchGestures.SpecificationsBinding.Bind(SpecificationsBinding.Child(c => c.GestureTouchpad));
             touch.SpecificationsBinding.Bind(SpecificationsBinding.Child(c => c.Touch));
             mouseButtons.SpecificationsBinding.Bind(SpecificationsBinding.Child(c => c.MouseButtons));
         }
@@ -56,6 +62,7 @@ namespace OpenTabletDriver.UX.Windows.Configurations.Controls.Specifications
         private DigitizerSpecificationsEditor digitizer, touch;
         private PenSpecificationsEditor pen;
         private ButtonSpecificationsEditor auxButtons;
+        private GestureTouchpadSpecificationsEditor touchGestures;
         private ButtonSpecificationsEditor mouseButtons;
     }
 }

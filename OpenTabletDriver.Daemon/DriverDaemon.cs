@@ -351,6 +351,12 @@ namespace OpenTabletDriver.Daemon
                 Log.Write(group, $"Express Key Bindings: " + string.Join(", ", bindingHandler.AuxButtons.Select(b => b.Value?.Binding)));
             }
 
+            if (settings.TouchGestures != null && settings.TouchGestures.Any(b => b?.Path != null))
+            {
+                SetBindingHandlerCollectionSettings(bindingServiceProvider, settings.TouchGestures, bindingHandler.TouchGestures, tabletReference);
+                Log.Write(group, $"Touch Gesture Bindings: " + string.Join(", ", bindingHandler.TouchGestures.Select(b => b.Value?.Binding)));
+            }
+
             if (settings.MouseButtons != null && settings.MouseButtons.Any(b => b?.Path != null))
             {
                 SetBindingHandlerCollectionSettings(bindingServiceProvider, settings.MouseButtons, bindingHandler.MouseButtons, tabletReference);
